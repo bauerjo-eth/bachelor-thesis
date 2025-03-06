@@ -100,8 +100,8 @@ After 6 points, they are saved to a CSV file and the next file is loaded."""
             if hit:
                 self.points.append(location.copy())
                 self.report({'INFO'}, f"Point {len(self.points)} recorded at {location}")
-                # (Optional) Visualize the point by adding a small sphere.
-                bpy.ops.mesh.primitive_uv_sphere_add(radius=0.05, location=location)
+                # (Optional) Visualize the point by adding a small sphere with a smaller radius.
+                bpy.ops.mesh.primitive_uv_sphere_add(radius=0.005, location=location)
             else:
                 self.report({'WARNING'}, "No mesh hit. Right-click again.")
 
