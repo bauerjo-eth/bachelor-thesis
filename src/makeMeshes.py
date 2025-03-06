@@ -41,8 +41,8 @@ with open(joints_csv_path, 'w', newline='') as csvfile:
     # Generate meshes and save corresponding joint positions.
     for i in range(num_meshes):
         # Generate random parameters for SMPL-X.
-        betas = torch.randn(1, 10) * 1
-        body_pose = torch.randn(1, 63) * 0.05
+        betas = torch.randn(1, 10) 
+        body_pose = torch.randn(1, 63) * 0.2
         global_orient = torch.randn(1, 3) * 0.1
         
         # Forward pass through the model.
@@ -50,8 +50,8 @@ with open(joints_csv_path, 'w', newline='') as csvfile:
         vertices = output.vertices.detach().cpu().numpy().squeeze()
         faces = model.faces  # Faces are fixed for SMPL-X.
         
-        # Save the mesh as an OBJ file.
-        mesh_file = os.path.join(mesh_output_folder, f"smplx_mesh_{i+1}.obj")
+        # Save the mesh as an OBJ file with three-digit numbering.
+        mesh_file = os.path.join(mesh_output_folder, f"smplx_mesh_{i+1:03d}.obj")
         mesh = trimesh.Trimesh(vertices, faces)
         mesh.export(mesh_file)
         
