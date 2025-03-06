@@ -1,3 +1,6 @@
+#use this script in blender to label eFAST points
+#right click creates labels
+
 import bpy
 import os
 import csv
@@ -21,7 +24,7 @@ def get_3d_view_context():
     return None
 
 class OBJECT_OT_LabelPoints(bpy.types.Operator):
-    """Click on 6 points on the mesh to label it.
+    """Right-click on 6 points on the mesh to label it.
 After 6 points, they are saved to a CSV file and the next file is loaded."""
     bl_idname = "object.label_points"
     bl_label = "Label Points on Mesh"
@@ -76,15 +79,16 @@ After 6 points, they are saved to a CSV file and the next file is loaded."""
         self.points = []
         self.load_current_file(context)
         context.window_manager.modal_handler_add(self)
-        self.report({'INFO'}, "Click on the mesh to mark a point (6 points per file).")
+        self.report({'INFO'}, "Right-click on the mesh to mark a point (6 points per file).")
         return {'RUNNING_MODAL'}
 
     def modal(self, context, event):
-        if event.type == 'LEFTMOUSE' and event.value == 'PRESS':
+        # Only process right mouse button presses for labeling.
+        if event.type == 'RIGHTMOUSE' and event.value == 'PRESS':
             # Use the override context's region and region_data.
             region = self.override_context['region']
             rv3d = self.override_context['region_data']
-            # Map the global mouse coordinates to the 3D view's region coordinates.
+            # Map global mouse coordinates to local region coordinates.
             local_coord = (event.mouse_x - region.x, event.mouse_y - region.y)
 
             # Compute the ray from the view using the local coordinates.
@@ -99,7 +103,7 @@ After 6 points, they are saved to a CSV file and the next file is loaded."""
                 # (Optional) Visualize the point by adding a small sphere.
                 bpy.ops.mesh.primitive_uv_sphere_add(radius=0.05, location=location)
             else:
-                self.report({'WARNING'}, "No mesh hit. Click again.")
+                self.report({'WARNING'}, "No mesh hit. Right-click again.")
 
             # When 6 points have been marked, save them and load the next file.
             if len(self.points) >= 6:
@@ -110,7 +114,7 @@ After 6 points, they are saved to a CSV file and the next file is loaded."""
                 if self.current_index < len(self.obj_files):
                     self.points = []
                     self.load_current_file(context)
-                    self.report({'INFO'}, "Loaded next file. Click to label points.")
+                    self.report({'INFO'}, "Loaded next file. Right-click to label points.")
                 else:
                     self.report({'INFO'}, "All files have been labeled.")
                     return {'FINISHED'}
@@ -120,6 +124,7 @@ After 6 points, they are saved to a CSV file and the next file is loaded."""
             self.report({'INFO'}, "Labeling cancelled.")
             return {'CANCELLED'}
 
+        # Pass through all other events so normal navigation works.
         return {'PASS_THROUGH'}
 
     def save_points_to_csv(self, filename, points):
@@ -143,5 +148,5 @@ def unregister():
 
 if __name__ == "__main__":
     register()
-    # You can start the operator from any area now.
+    # Start the operator (it now uses right-click to label).
     bpy.ops.object.label_points('INVOKE_DEFAULT')
