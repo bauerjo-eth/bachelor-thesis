@@ -18,7 +18,7 @@ num_meshes = 10
 
 for i in range(num_meshes):
     # Generate random shape and pose parameters
-    betas = torch.randn(1, 10) * 0.03  # Shape variations
+    betas = torch.randn(1, 10) * 1  # Shape variations
     body_pose = torch.randn(1, 63) * 0.05  # Small pose variations
     global_orient = torch.randn(1, 3) * 0.1  # Global orientation variations
 
