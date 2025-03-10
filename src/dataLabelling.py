@@ -1,6 +1,3 @@
-#use this script in blender to label eFAST points
-#right click creates labels
-
 import bpy
 import os
 import csv
@@ -33,7 +30,7 @@ After 6 points, they are saved to a CSV file and the next file is loaded."""
         self.obj_files = []         # List of full paths to OBJ files
         self.current_index = 0      # Index of the current OBJ file
         self.points = []            # List to store 6 clicked points (mathutils.Vector)
-        self.folder_path = r"C:\Dokumente\Studium\6. Semester\Bachelorarbeit\Code\smplx_meshes_test"       # Folder with OBJ files
+        self.folder_path = r"C:\Dokumente\Studium\6. Semester\Bachelorarbeit\Code\smplx_meshes_test"  # Folder with OBJ files
         self.output_path = r"C:\Dokumente\Studium\6. Semester\Bachelorarbeit\Code\smplx_labels_test\labels.csv"
         self.override_context = None
 
@@ -70,6 +67,11 @@ After 6 points, they are saved to a CSV file and the next file is loaded."""
             self.report({'ERROR'}, "Could not find a 3D view context.")
             return {'CANCELLED'}
 
+        # Delete the existing labels CSV file if it exists.
+        if os.path.exists(self.output_path):
+            os.remove(self.output_path)
+            self.report({'INFO'}, "Existing labels.csv deleted. Creating a new one.")
+
         self.load_obj_files()
         if not self.obj_files:
             self.report({'ERROR'}, "No OBJ files found in the folder.")
@@ -100,7 +102,7 @@ After 6 points, they are saved to a CSV file and the next file is loaded."""
             if hit:
                 self.points.append(location.copy())
                 self.report({'INFO'}, f"Point {len(self.points)} recorded at {location}")
-                # (Optional) Visualize the point by adding a small sphere with a smaller radius.
+                # (Optional) Visualize the point by adding a small sphere.
                 bpy.ops.mesh.primitive_uv_sphere_add(radius=0.005, location=location)
             else:
                 self.report({'WARNING'}, "No mesh hit. Right-click again.")
@@ -128,10 +130,17 @@ After 6 points, they are saved to a CSV file and the next file is loaded."""
         return {'PASS_THROUGH'}
 
     def save_points_to_csv(self, filename, points):
-        """Append the filename and the six (x,y,z) coordinates to the CSV output file."""
+        """Append the filename and the six transformed (x,y,z) coordinates to the CSV output file.
+           The transformation converts Blender coordinates to the SMPL-X coordinate system:
+           SMPL-X: x = B_x, y = B_z, z = -B_y
+        """
         row = [filename]
         for pt in points:
-            row.extend([pt.x, pt.y, pt.z])
+            # Apply the transformation: (x, y, z) -> (x, z, -y)
+            transformed_x = pt.x
+            transformed_y = pt.z
+            transformed_z = -pt.y
+            row.extend([transformed_x, transformed_y, transformed_z])
         file_exists = os.path.exists(self.output_path)
         with open(self.output_path, 'a', newline='') as csvfile:
             writer = csv.writer(csvfile)

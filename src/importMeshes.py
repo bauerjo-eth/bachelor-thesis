@@ -1,5 +1,3 @@
-#this is to import meshes in blender
-#just open a scripting window in blender and run the script from the text editor
 import bpy
 import os
 
@@ -14,11 +12,27 @@ bpy.ops.object.delete()
 mesh_files = [f for f in os.listdir(mesh_folder) if f.lower().endswith('.obj')]
 print(f"Found {len(mesh_files)} OBJ file(s).")
 
-# -- 4) Import each .obj using the NEW importer --
-for file_name in mesh_files:
+# Define the offset distance (adjust as needed)
+offset_distance = 2.0
+
+# -- 4) Import each .obj and offset them --
+for i, file_name in enumerate(mesh_files):
     file_path = os.path.join(mesh_folder, file_name)
     print("Importing:", file_path)
-    # This is the new C++ OBJ Importer
+    
+    # Import the .obj file using the new importer
     bpy.ops.wm.obj_import(filepath=file_path)
+    
+    # Retrieve the newly imported objects (they are selected automatically)
+    imported_objs = bpy.context.selected_objects
+    
+    # Move the objects by an offset based on the index to avoid collision
+    for obj in imported_objs:
+        obj.location.x += i * offset_distance
+        # Optionally, adjust y or z coordinates too:
+        # obj.location.y += i * offset_distance
+
+    # Deselect all objects to prepare for the next import
+    bpy.ops.object.select_all(action='DESELECT')
 
 print("Import completed!")
