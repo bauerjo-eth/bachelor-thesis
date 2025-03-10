@@ -6,9 +6,9 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D  # for 3D plotting
 
 # --- Configuration ---
-mesh_folder = r"smplx_meshes_test"           # Folder with the mesh OBJ files.
-labels_csv_path = r"smplx_labels_test\labels.csv"  # CSV file with label points.
-selected_id = 2  # Change this value (0-indexed) to visualize a different mesh/labels.
+mesh_folder = r"C:\Dokumente\Studium\6. Semester\Bachelorarbeit\Code\smplx_big_test\smplx_meshes"           # Folder with the mesh OBJ files.
+labels_csv_path = r"C:\Dokumente\Studium\6. Semester\Bachelorarbeit\Code\smplx_big_test\smplx_labels\labels_reordered.csv"  # CSV file with label points.
+selected_id = 188 # Change this value (0-indexed) to visualize a different mesh/labels.
 
 # --- Read the labels CSV ---
 with open(labels_csv_path, 'r', newline='') as csvfile:

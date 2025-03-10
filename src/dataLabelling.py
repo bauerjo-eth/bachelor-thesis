@@ -30,8 +30,8 @@ After 6 points, they are saved to a CSV file and the next file is loaded."""
         self.obj_files = []         # List of full paths to OBJ files
         self.current_index = 0      # Index of the current OBJ file
         self.points = []            # List to store 6 clicked points (mathutils.Vector)
-        self.folder_path = r"C:\Dokumente\Studium\6. Semester\Bachelorarbeit\Code\smplx_meshes_test"  # Folder with OBJ files
-        self.output_path = r"C:\Dokumente\Studium\6. Semester\Bachelorarbeit\Code\smplx_labels_test\labels.csv"
+        self.folder_path = r"C:\Dokumente\Studium\6. Semester\Bachelorarbeit\Code\smplx_big_test\smplx_meshes"  # Folder with OBJ files
+        self.output_path = r"C:\Dokumente\Studium\6. Semester\Bachelorarbeit\Code\smplx_big_test\smplx_labels\labels.csv"
         self.override_context = None
 
     def load_obj_files(self):
