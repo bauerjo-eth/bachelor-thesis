@@ -1,0 +1,3 @@
+[submodule "ML/src/PointNet"]
+	path = ML/src/PointNet
+	url = https://github.com/yanx27/Pointnet_Pointnet2_pytorch.git
