@@ -21,16 +21,16 @@ from trainEFAST import MeshToEFastNet
 INPUT_FORMAT = "npy"
 
 # File path for the downsampled point cloud (used for prediction)
-DOWNSAMPLED_FILE_PATH = r"C:\Dokumente\Studium\6. Semester\Bachelorarbeit\Code\ML\smplx_big_test\presampled_meshes\64_points_from_point_cloud\iphone_without_background.npy"
+DOWNSAMPLED_FILE_PATH = r"C:\Dokumente\Studium\6. Semester\Bachelorarbeit\Code\ML\smplx_big_test\presampled_meshes\512_points_from_point_cloud\iphone_without_background.npy"
 
 # File path for the full (original) point cloud used for visualization
 FULL_CLOUD_FILE_PATH = r"C:\Dokumente\Studium\6. Semester\Bachelorarbeit\Code\ML\Scan\MeWithIphone\MeWithIphone2_14_27_37.xyz"
 
 # Number of points used in training (must match training configuration)
-NUM_SAMPLED_POINTS = 64
+NUM_SAMPLED_POINTS = 512
 
 # Checkpoint file for the trained NN model.
-CHECKPOINT_PATH = r"C:\Dokumente\Studium\6. Semester\Bachelorarbeit\Code\ML\model_checkpoints\checkpoint_20250317_132630.pth"
+CHECKPOINT_PATH = r"C:\Dokumente\Studium\6. Semester\Bachelorarbeit\Code\ML\model_checkpoints\checkpoint_20250317_155654.pth"
 
 # Output dimension of your NN model (e.g. if it predicts 18 values, set OUTPUT_DIM = 18)
 OUTPUT_DIM = 18

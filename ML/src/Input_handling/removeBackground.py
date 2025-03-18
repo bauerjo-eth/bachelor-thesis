@@ -4,9 +4,9 @@ import numpy as np
 # === Configuration Parameters ===
 # ================================
 INPUT_XYZ = r"C:\Dokumente\Studium\6. Semester\Bachelorarbeit\Code\ML\Scan\MeWithIphone\MeWithIphone2_14_27_37.xyz"  # Path to your input .xyz file
-OUTPUT_NPY = r"C:\Dokumente\Studium\6. Semester\Bachelorarbeit\Code\ML\smplx_big_test\presampled_meshes\64_points_from_point_cloud\iphone_without_background.npy"  # Path where the .npy file will be saved
+OUTPUT_NPY = r"C:\Dokumente\Studium\6. Semester\Bachelorarbeit\Code\ML\smplx_big_test\presampled_meshes\512_points_from_point_cloud\iphone_without_background.npy"  # Path where the .npy file will be saved
 Z_THRESHOLD = -1.82                                   # Remove points with z < -1.82
-NUM_DOWNSAMPLED_POINTS = 64                           # Number of points after downsampling
+NUM_DOWNSAMPLED_POINTS = 512                          # Number of points after downsampling
 
 def main():
     # Load the .xyz file (assuming comma-separated values)

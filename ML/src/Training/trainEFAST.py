@@ -22,7 +22,7 @@ CHECKPOINT_DIR = r"C:\Dokumente\Studium\6. Semester\Bachelorarbeit\Code\ML\model
 PRESAMPLED_DIR = r"C:\Dokumente\Studium\6. Semester\Bachelorarbeit\Code\ML\smplx_big_test\pipeline\final_downsampled"
 
 # Sampling configuration: choose the number of points to sample from each mesh.
-NUM_SAMPLED_POINTS = 64
+NUM_SAMPLED_POINTS = 512
 
 # Training configuration
 USE_KFOLD = False        # Set to False to use a simple train/validation split.

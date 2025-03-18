@@ -21,7 +21,7 @@ TEMP_TRANSFORM_FOLDER = r"C:\Dokumente\Studium\6. Semester\Bachelorarbeit\Code\p
 TEMP_OBJ_FOLDER = r"C:\Dokumente\Studium\6. Semester\Bachelorarbeit\Code\pipeline\temp_obj"
 
 # Set number of downsampled points.
-NUM_SAMPLED_POINTS = 64
+NUM_SAMPLED_POINTS = 512
 
 # Set multiplication factor.
 MULTIPLICATION_FACTOR = 3

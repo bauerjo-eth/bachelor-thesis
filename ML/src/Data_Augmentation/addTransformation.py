@@ -84,7 +84,7 @@ def transform_labels(row, R, t, num_label_points=6):
     return [row.iloc[0]] + transformed
 
 def transform_meshes_and_labels(labels_csv_path, mesh_folder, output_folder,
-                                input_type="obj", delimiter=",", max_translation=1.5,
+                                input_type="obj", delimiter=",", max_translation=5,
                                 max_rotation_deg=90, num_label_points=6):
     """
     Reads the labels CSV, loads each mesh file (OBJ or XYZ), applies a random transformation
